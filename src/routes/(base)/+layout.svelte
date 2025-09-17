@@ -14,6 +14,7 @@
 
 	const user = data.user;
 	const error = data.error;
+	const logoBase64 = data.logo ? `data:image/png;base64,${data.logo}`: null;
 
 	let mainClass =
 		env.PUBLIC_MENU_LOCATION === 'top' || !env?.PUBLIC_MENU_LOCATION
@@ -38,7 +39,7 @@
 	}
 </script>
 
-<Header menus={data.appMenus} error={data.error} {user} />
+<Header menus={data.appMenus} error={data.error} {user} {logoBase64} />
 
 <div class="flex px-2 mx-auto h-screen w-full bg-primary-400">
 	<main class={mainClass}>

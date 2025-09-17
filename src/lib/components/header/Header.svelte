@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { sineIn } from 'svelte/easing';
-
 	import {
 		Navbar,
 		NavHamburger,
@@ -25,7 +24,7 @@
 	import { onMount } from 'svelte';
 	import { env } from '$env/dynamic/public';
 	import { ChevronRightSolid } from 'flowbite-svelte-icons';
-	export let user, menus, error;
+	export let user, menus, error , logoBase64;
 
 	// The PUBLIC_MENU_LOCATION env variable controls how the menu appears.
 	// "top": Menu appears in the top navbar.
@@ -45,6 +44,7 @@
 	let activateClickOutside = true;
 	let hoverDropMenu: { [key: number]: boolean } = {};
 	let hoverDropMenus: { [key: number]: boolean } = {};
+	let dynamicLogo : string = '';
 
 	$: if (width >= breakPoint) {
 		drawerHidden = false;
@@ -99,6 +99,24 @@
 			[appMenuID]: false
 		};
 	};
+
+	// onMount(async () => {
+	// 	const params = {
+    //   		TenantID: Number(env1.DF_TENANT_ID),
+    //   		AppID: Number(env1.DF_APP_ID)
+    // 	}
+
+    // 	try {
+    //   		const client = this.dfClientService.getClient();
+    //   		const response: any = await client?.getApplicationService().getLogo(params);
+    //   		const base64Logo = response?.Result?.LogoBase64 || null;
+    //   		this.Logo = base64Logo ? `data:image/png;base64,${base64Logo}` : 'assets/images/DF-Logo.svg';
+    // 	}
+    // 	catch (ex) {
+    //   		console.error('Error fetching logo:', ex);
+    //   		this.Logo = 'assets/images/DF-Logo.svg';
+    // 	}
+	// });
 </script>
 
 <svelte:window bind:innerWidth={width} />
@@ -141,7 +159,7 @@
 		</Button>
 	{/if}
 
-	<img src={logo} class="h-12" alt="Logo" />
+	<img src={logoBase64 || logo} class="h-12" alt="Logo" />
 
 	{#if env.PUBLIC_MENU_LOCATION == 'top'}
 		<NavHamburger on:click={toggle} btnClass="md:hidden bg-white" />
