@@ -2,9 +2,9 @@ name: "CodeQL SAST"
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ "main", "stage" ]
   pull_request:
-    branches: [ "main", "develop" ]
+    branches: [ "main", "stage" ]
   schedule:
     - cron: "0 3 * * 1"  # Weekly Monday 03:00 UTC
 
